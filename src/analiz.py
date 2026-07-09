@@ -1,6 +1,6 @@
 """Yeni fiyatı öncekiyle karşılaştırıp bildirilecek olayları üretir."""
 
-SITE_ADLARI = {"obilet": "Obilet", "hotelscom": "Hotels.com"}
+SITE_ADLARI = {"obilet": "Obilet", "hotelscom": "Hotels.com", "etstur": "Etstur"}
 
 
 def _tl(fiyat: float) -> str:

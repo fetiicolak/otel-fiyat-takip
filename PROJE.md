@@ -2,7 +2,7 @@
 
 ## Amaç
 
-İki kullanıcının (Feti ve arkadaşı) rezervasyon yapmayı planladığı **2 oteli**, obilet ve hotels.com gibi aracı siteler üzerinden **4 saatte bir** otomatik kontrol eden; fiyat düşüşlerinde, yeni indirim/kampanyalarda ve belirgin fiyat artışlarında her iki kullanıcıya **Telegram** üzerinden anlık bildirim gönderen bir sistem.
+İki kullanıcının (Feti ve arkadaşı) rezervasyon yapmayı planladığı **2 oteli** (Marin Otel ve Atrium Otel, Çeşme), **Obilet ve Etstur** üzerinden **4 saatte bir** otomatik kontrol eden; fiyat düşüşlerinde, yeni indirim/kampanyalarda ve belirgin fiyat artışlarında her iki kullanıcıya **Telegram** üzerinden anlık bildirim gönderen bir sistem.
 
 Sistem tamamen bulutta (**GitHub Actions**) çalışır — bilgisayar kapalıyken de 7/24 aktiftir. Fiyat geçmişi, **GitHub Pages** üzerinde yayınlanan tek sayfalık basit bir web panelinde grafikle görüntülenir.
 
@@ -13,7 +13,7 @@ GitHub Actions (4 saatte bir cron)
         │
         ▼
   src/main.py ──► siteler/obilet.py ────┐
-        │    └──► siteler/hotelscom.py ─┤  Playwright (headless Chromium)
+        │    └──► siteler/etstur.py ────┤  Playwright (headless Chromium)
         │                               │  ile fiyat + indirim çekilir
         ▼                               ▼
   src/analiz.py  ◄── data/price_history.json (önceki kayıtlar)
@@ -57,8 +57,8 @@ Gizli bilgiler GitHub Secrets'ta tutulur (kod içinde YOKTUR):
 
 ## Riskler
 
-- **hotels.com bot koruması**: Engellenirse alternatif aracı site (Etstur, Otelz vb.) adaptörü eklenir — mimari site-başına-adaptör olduğu için tek dosyalık iştir.
-- **Site tasarım değişikliği**: Scraper fiyat bulamazsa sistem çökmez, Telegram'a uyarı düşer.
+- **hotels.com bot koruması** (yaşandı, Temmuz 2026): Akamai koruması headless tarayıcıyı bağlantı seviyesinde engelledi; GitHub Actions'ın veri merkezi IP'lerinde durum daha da kötü olurdu. Bu yüzden hotels.com yerine **Etstur** adaptörü kullanılıyor (aynı oteller, tutarlı fiyatlar + zengin kupon bilgisi). `siteler/hotelscom.py` ileride gerekirse diye repoda duruyor ama yapılandırmada kullanılmıyor.
+- **Site tasarım değişikliği**: Scraper fiyat bulamazsa sistem çökmez, Telegram'a uyarı düşer. Obilet'te fiyat yalnızca oda listesi bölgesinden (son "Odayı Seç" öncesi) okunur; Etstur'da başlıktaki "… TL / Odaları Gör" fiyatı esas alınır.
 
 ## Kullanım
 

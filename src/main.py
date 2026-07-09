@@ -14,9 +14,9 @@ from pathlib import Path
 import yaml
 
 from . import analiz, bildirim, depo
-from .siteler import hotelscom, obilet
+from .siteler import etstur, hotelscom, obilet
 
-SITELER = {"obilet": obilet, "hotelscom": hotelscom}
+SITELER = {"obilet": obilet, "hotelscom": hotelscom, "etstur": etstur}
 AYAR_DOSYASI = Path(__file__).resolve().parent.parent / "config" / "oteller.yaml"
 
 

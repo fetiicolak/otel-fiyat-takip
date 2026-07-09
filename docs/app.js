@@ -1,4 +1,4 @@
-const SITE_ADLARI = { obilet: "Obilet", hotelscom: "Hotels.com" };
+const SITE_ADLARI = { obilet: "Obilet", hotelscom: "Hotels.com", etstur: "Etstur" };
 const RENKLER = ["#2563eb", "#f59e0b", "#10b981", "#8b5cf6"];
 
 const tl = (f) => f.toLocaleString("tr-TR", { maximumFractionDigits: 0 }) + " TL";

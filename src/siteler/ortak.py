@@ -37,7 +37,8 @@ def sayfa_metni_al(url: str, bekle_saniye: int = 8) -> str:
     return metin
 
 
-def _sayiya_cevir(metin: str) -> float:
+def sayiya_cevir(metin: str) -> float:
+    """'12.400,50' gibi Türkçe biçimli tutarı sayıya çevirir."""
     return float(metin.replace(".", "").replace(",", "."))
 
 
@@ -51,7 +52,7 @@ def fiyatlari_bul(metin: str, taban: float = 500, tavan: float = 2_000_000) -> l
     for eslesme in FIYAT_DESENI.finditer(metin):
         ham = eslesme.group(1) or eslesme.group(2)
         try:
-            deger = _sayiya_cevir(ham)
+            deger = sayiya_cevir(ham)
         except ValueError:
             continue
         if taban <= deger <= tavan:
@@ -66,6 +67,8 @@ def indirimleri_bul(metin: str) -> list[str]:
         satir = " ".join(satir.split())
         if not (5 <= len(satir) <= 80):
             continue
+        if not satir[0].isalnum() and satir[0] != "%":
+            continue  # "’a özel..." gibi kırpık/artık satırları ele
         kucuk = satir.lower()
         if any(a in kucuk for a in INDIRIM_ANAHTARLARI) and ("%" in satir or "TL" in satir or "indirim" in kucuk):
             if satir not in bulunanlar:
