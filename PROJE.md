@@ -40,16 +40,19 @@ GitHub Actions (4 saatte bir cron)
 ## Bildirim Kuralları
 
 - 🔻 **Fiyat düşüşü**: Eşik aşılırsa bildirim (varsayılan: %3 veya 250 TL — `config/oteller.yaml`'dan ayarlanır)
-- 🏷️ **Yeni indirim/kampanya**: Sayfada daha önce görülmeyen kampanya metni belirirse bildirim
+- 🏷️ **Yeni indirim/kampanya (otel bazlı)**: Otel sayfasında daha önce görülmeyen kampanya metni belirirse bildirim
+- 🎟️ **Yeni site kampanyası**: Obilet/Etstur kampanya sayfalarında oteller için geçerli yeni bir genel kupon (örn. YAZFIRSATI kodu) belirirse bildirim
 - 🔺 **Belirgin fiyat artışı**: Aynı eşiklerle bilgilendirme
 - ⚠️ **Okuma hatası**: Bir site okunamazsa (bot koruması vb.) tek seferlik uyarı
-- 📋 **Günlük özet**: Her sabah 09:00'da (TR saati) tüm otellerin güncel durumu
+- 📋 **Günlük özet**: Her sabah 09:00'da (TR saati) tüm otellerin güncel durumu + aktif site kampanyaları
 
-> Not: Takip edilen fiyat, sayfadaki **en düşük oda fiyatıdır** (mantık: en ucuz uygun oda).
+> Fiyatlar **çift** takip edilir: en ucuz odanın **liste (normal) fiyatı** ve site indirimi
+> uygulanmış **indirimli fiyatı** (Obilet'te "Sepete Özel", Etstur'da başlıktaki indirimli fiyat).
+> Karşılaştırma ve eşikler indirimli (gerçekte ödenecek) fiyat üzerinden yapılır.
 
 ## Yapılandırma
 
-Otel bilgileri `config/oteller.yaml` dosyasındadır: otel adı, site linkleri (tarih ve kişi sayısı seçili arama sonucu linki), bildirim eşikleri.
+Otel bilgileri `config/oteller.yaml` dosyasındadır: otel adı, site linkleri (tarih ve kişi sayısı seçili arama sonucu linki), bildirim eşikleri ve site kampanya sayfalarının adresleri (`kampanya_sayfalari`).
 
 Gizli bilgiler GitHub Secrets'ta tutulur (kod içinde YOKTUR):
 - `TELEGRAM_BOT_TOKEN` — BotFather'dan alınan bot anahtarı

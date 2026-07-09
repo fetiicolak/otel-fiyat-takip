@@ -7,6 +7,11 @@ ayarlar:
   esik_yuzde: 3        # % cinsinden
   esik_tl: 250         # TL cinsinden
 
+# Site geneli kupon/kampanya takibi (örn. Obilet YAZFIRSATI)
+kampanya_sayfalari:
+  obilet: "https://www.obilet.com/kampanyalar"
+  etstur: "https://www.etstur.com/kampanyalar"
+
 oteller:
   - id: marin
     ad: "Marin Otel (Çeşme)"

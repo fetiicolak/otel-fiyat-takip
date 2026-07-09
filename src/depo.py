@@ -10,6 +10,8 @@ from pathlib import Path
 KOK = Path(__file__).resolve().parent.parent
 VERI_DOSYASI = KOK / "data" / "price_history.json"
 PANEL_KOPYASI = KOK / "docs" / "price_history.json"
+KAMPANYA_DOSYASI = KOK / "data" / "kampanyalar.json"
+KAMPANYA_PANEL = KOK / "docs" / "kampanyalar.json"
 
 
 def yukle() -> list[dict]:
@@ -24,6 +26,21 @@ def kaydet(kayitlar: list[dict]) -> None:
     VERI_DOSYASI.write_text(icerik, encoding="utf-8")
     PANEL_KOPYASI.parent.mkdir(parents=True, exist_ok=True)
     PANEL_KOPYASI.write_text(icerik, encoding="utf-8")
+
+
+def kampanyalari_yukle() -> dict:
+    """Site geneli kampanyalar: {"site": [kampanya, ...], ...}"""
+    if not KAMPANYA_DOSYASI.exists():
+        return {}
+    return json.loads(KAMPANYA_DOSYASI.read_text(encoding="utf-8"))
+
+
+def kampanyalari_kaydet(kampanyalar: dict) -> None:
+    icerik = json.dumps(kampanyalar, ensure_ascii=False, indent=1)
+    KAMPANYA_DOSYASI.parent.mkdir(parents=True, exist_ok=True)
+    KAMPANYA_DOSYASI.write_text(icerik, encoding="utf-8")
+    KAMPANYA_PANEL.parent.mkdir(parents=True, exist_ok=True)
+    KAMPANYA_PANEL.write_text(icerik, encoding="utf-8")
 
 
 def son_kayit(kayitlar: list[dict], otel_id: str, site: str) -> dict | None:

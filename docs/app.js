@@ -54,7 +54,8 @@ async function yukle() {
           ? `<span class="degisim dusuk">▼ %${Math.abs(yuzde)}</span>`
           : `<span class="degisim yuksek">▲ %${yuzde}</span>`;
       }
-      fiyatHtml += kutu(ad, `<span class="tutar">${tl(son.fiyat)}</span>`, degisim, son.url);
+      const normal = son.normal_fiyat ? `<span class="normal-fiyat">${tl(son.normal_fiyat)}</span>` : "";
+      fiyatHtml += kutu(ad, `<span class="tutar">${tl(son.fiyat)}</span>${normal}`, degisim, son.url);
       if (son.indirimler?.length) {
         indirimHtml += `<div class="indirimler">🏷️ <b>${ad}:</b> ${son.indirimler.join(" · ")}</div>`;
       }
@@ -71,6 +72,30 @@ async function yukle() {
 
     ciz(otelId, siteler);
   }
+
+  await kampanyalariGoster(kok);
+}
+
+async function kampanyalariGoster(kok) {
+  let kampanyalar;
+  try {
+    const yanit = await fetch("kampanyalar.json", { cache: "no-store" });
+    kampanyalar = await yanit.json();
+  } catch {
+    return; // dosya yoksa kartı gösterme
+  }
+  const satirlar = [];
+  for (const [site, liste] of Object.entries(kampanyalar)) {
+    for (const k of liste || []) {
+      satirlar.push(`<li><b>${SITE_ADLARI[site] || site}:</b> ${k}</li>`);
+    }
+  }
+  if (!satirlar.length) return;
+  const kart = document.createElement("div");
+  kart.className = "kart";
+  kart.innerHTML = `<h2>🎟️ Site Kampanyaları</h2>
+    <ul style="margin:10px 0 0 18px; font-size:.9rem; line-height:1.7">${satirlar.join("")}</ul>`;
+  kok.appendChild(kart);
 }
 
 function kutu(ad, icerik, degisim, url) {

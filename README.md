@@ -1,6 +1,6 @@
 # 🏨 Otel Fiyat Takip
 
-İki otelin fiyatlarını Obilet ve Etstur üzerinden 4 saatte bir kontrol eder; fiyat düşüşü, yeni kampanya ve belirgin artışlarda **Telegram** ile bildirim gönderir. GitHub Actions üzerinde 7/24 çalışır, fiyat geçmişi **GitHub Pages** panelinde grafikle görünür.
+İki otelin liste ve indirimli fiyatlarını Obilet ve Etstur üzerinden 4 saatte bir kontrol eder; site geneli kuponları (YAZFIRSATI gibi) da izler; fiyat düşüşü, yeni kampanya ve belirgin artışlarda **Telegram** ile bildirim gönderir. GitHub Actions üzerinde 7/24 çalışır, fiyat geçmişi **GitHub Pages** panelinde grafikle görünür.
 
 Detaylı mimari için: [PROJE.md](PROJE.md)
 

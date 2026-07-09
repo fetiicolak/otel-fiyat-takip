@@ -20,17 +20,23 @@ def fiyat_cek(url: str) -> dict:
     try:
         metin = ortak.sayfa_metni_al(url, bekle_saniye=8)
     except Exception as hata:
-        return {"fiyat": None, "indirimler": [], "hata": f"Sayfa açılamadı: {hata}"}
+        return {"fiyat": None, "normal_fiyat": None, "indirimler": [],
+                "hata": f"Sayfa açılamadı: {hata}"}
+
+    # Oda bloklarındaki "N Gece / <fiyat> TL" değerleri liste (normal) fiyatlardır
+    gece_fiyatlari = [ortak.sayiya_cevir(e.group(1)) for e in GECE_FIYAT.finditer(metin)]
+    normal = min(gece_fiyatlari) if gece_fiyatlari else None
 
     eslesme = BASLIK_FIYAT.search(metin)
     if eslesme:
-        fiyat = ortak.sayiya_cevir(eslesme.group(1))
+        fiyat = ortak.sayiya_cevir(eslesme.group(1))  # başlık fiyatı: indirimli en düşük
+    elif normal is not None:
+        fiyat, normal = normal, None
     else:
-        # Başlık fiyatı yoksa oda bloklarındaki "N Gece / fiyat" değerlerinin en düşüğü
-        gece_fiyatlari = [ortak.sayiya_cevir(e.group(1)) for e in GECE_FIYAT.finditer(metin)]
-        if not gece_fiyatlari:
-            return {"fiyat": None, "indirimler": [],
-                    "hata": "Oda fiyatı bulunamadı (sayfa yapısı değişmiş veya müsaitlik yok olabilir)"}
-        fiyat = min(gece_fiyatlari)
+        return {"fiyat": None, "normal_fiyat": None, "indirimler": [],
+                "hata": "Oda fiyatı bulunamadı (sayfa yapısı değişmiş veya müsaitlik yok olabilir)"}
+    if normal is not None and normal <= fiyat:
+        normal = None
 
-    return {"fiyat": fiyat, "indirimler": ortak.indirimleri_bul(metin), "hata": None}
+    return {"fiyat": fiyat, "normal_fiyat": normal,
+            "indirimler": ortak.indirimleri_bul(metin), "hata": None}

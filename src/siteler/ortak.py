@@ -76,15 +76,22 @@ def indirimleri_bul(metin: str) -> list[str]:
     return bulunanlar[:5]
 
 
+def kucult(metin: str) -> str:
+    """Türkçe'ye uygun küçük harfe çevirme (İ→i, I→ı)."""
+    return metin.replace("İ", "i").replace("I", "ı").lower()
+
+
 def genel_fiyat_cek(url: str, bekle_saniye: int = 8) -> dict:
     """Varsayılan adaptör davranışı: sayfadaki en düşük makul TL fiyatını alır."""
     try:
         metin = sayfa_metni_al(url, bekle_saniye)
     except Exception as hata:  # zaman aşımı, ağ hatası vb.
-        return {"fiyat": None, "indirimler": [], "hata": f"Sayfa açılamadı: {hata}"}
+        return {"fiyat": None, "normal_fiyat": None, "indirimler": [],
+                "hata": f"Sayfa açılamadı: {hata}"}
 
     fiyatlar = fiyatlari_bul(metin)
     if not fiyatlar:
-        return {"fiyat": None, "indirimler": [],
+        return {"fiyat": None, "normal_fiyat": None, "indirimler": [],
                 "hata": "Sayfada fiyat bulunamadı (bot koruması veya tasarım değişikliği olabilir)"}
-    return {"fiyat": min(fiyatlar), "indirimler": indirimleri_bul(metin), "hata": None}
+    return {"fiyat": min(fiyatlar), "normal_fiyat": None,
+            "indirimler": indirimleri_bul(metin), "hata": None}

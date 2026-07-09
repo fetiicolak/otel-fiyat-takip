@@ -13,7 +13,7 @@ from pathlib import Path
 
 import yaml
 
-from . import analiz, bildirim, depo
+from . import analiz, bildirim, depo, kampanya
 from .siteler import etstur, hotelscom, obilet
 
 SITELER = {"obilet": obilet, "hotelscom": hotelscom, "etstur": etstur}
@@ -36,7 +36,8 @@ def calistir(test_modu: bool = False, ozet: bool = False) -> None:
 
             print(f"[kontrol] {otel['ad']} / {site} ...")
             sonuc = SITELER[site].fiyat_cek(url)
-            print(f"   fiyat={sonuc['fiyat']} indirimler={sonuc['indirimler']} hata={sonuc['hata']}")
+            print(f"   fiyat={sonuc['fiyat']} normal={sonuc.get('normal_fiyat')} "
+                  f"indirimler={sonuc['indirimler']} hata={sonuc['hata']}")
 
             onceki = depo.son_basarili(kayitlar, otel["id"], site)
             onceki_herhangi = depo.son_kayit(kayitlar, otel["id"], site)
@@ -49,6 +50,7 @@ def calistir(test_modu: bool = False, ozet: bool = False) -> None:
                 "site": site,
                 "url": url,
                 "fiyat": sonuc["fiyat"],
+                "normal_fiyat": sonuc.get("normal_fiyat"),
                 "indirimler": sonuc["indirimler"],
                 "hata": sonuc["hata"],
             }
@@ -58,8 +60,24 @@ def calistir(test_modu: bool = False, ozet: bool = False) -> None:
 
     depo.kaydet(kayitlar)
 
+    # Site geneli kampanyalar (YAZFIRSATI gibi kupon kodları)
+    kampanya_sayfalari = ayar.get("kampanya_sayfalari", {})
+    guncel_kampanyalar = {}
+    if kampanya_sayfalari:
+        print("[kontrol] site kampanyaları ...")
+        eski_kampanyalar = depo.kampanyalari_yukle()
+        guncel_kampanyalar = kampanya.hepsini_cek(kampanya_sayfalari)
+        for site, liste in guncel_kampanyalar.items():
+            print(f"   {site}: {liste}")
+        mesajlar += analiz.kampanyalari_karsilastir(eski_kampanyalar, guncel_kampanyalar)
+        # okunamayan sitenin eski listesi korunur
+        birlesik = dict(eski_kampanyalar)
+        birlesik.update({s: l for s, l in guncel_kampanyalar.items() if l is not None})
+        depo.kampanyalari_kaydet(birlesik)
+        guncel_kampanyalar = birlesik
+
     if ozet:
-        mesajlar.append(analiz.gunluk_ozet(oteller, kayitlar))
+        mesajlar.append(analiz.gunluk_ozet(oteller, kayitlar, guncel_kampanyalar))
 
     if not mesajlar:
         print("Bildirilecek değişiklik yok.")

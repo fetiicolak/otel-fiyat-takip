@@ -15,6 +15,7 @@ import re
 from . import ortak
 
 SEPET_BANNER = re.compile(r"sepete özel\s+([\d.,]+\s*TL)\s+[İi]ndirim", re.IGNORECASE)
+SEPETE_OZEL_FIYAT = re.compile(r"Sepete Özel\s+([\d.,]+)\s*TL")
 
 
 def _oda_bolumu(metin: str) -> str | None:
@@ -28,15 +29,16 @@ def fiyat_cek(url: str) -> dict:
     try:
         metin = ortak.sayfa_metni_al(url, bekle_saniye=8)
     except Exception as hata:
-        return {"fiyat": None, "indirimler": [], "hata": f"Sayfa açılamadı: {hata}"}
+        return {"fiyat": None, "normal_fiyat": None, "indirimler": [],
+                "hata": f"Sayfa açılamadı: {hata}"}
 
     oda_metni = _oda_bolumu(metin)
     if oda_metni is None:
-        return {"fiyat": None, "indirimler": [],
+        return {"fiyat": None, "normal_fiyat": None, "indirimler": [],
                 "hata": "Oda listesi bulunamadı (müsaitlik yok veya sayfa yapısı değişmiş olabilir)"}
     fiyatlar = ortak.fiyatlari_bul(oda_metni)
     if not fiyatlar:
-        return {"fiyat": None, "indirimler": [],
+        return {"fiyat": None, "normal_fiyat": None, "indirimler": [],
                 "hata": "Oda fiyatı bulunamadı (sayfa yapısı değişmiş olabilir)"}
 
     indirimler = ortak.indirimleri_bul(oda_metni)
@@ -46,5 +48,16 @@ def fiyat_cek(url: str) -> dict:
         if indirim not in indirimler:
             indirimler.append(indirim)
 
-    # En düşük bölüm fiyatı = en ucuz odanın sepete özel fiyatı
-    return {"fiyat": min(fiyatlar), "indirimler": indirimler, "hata": None}
+    # İndirimli fiyat = en ucuz odanın "Sepete Özel" fiyatı; normal fiyat = liste fiyatı
+    sepete_ozel = {ortak.sayiya_cevir(e.group(1)) for e in SEPETE_OZEL_FIYAT.finditer(oda_metni)}
+    sepete_ozel = {f for f in sepete_ozel if f >= 500}
+    if sepete_ozel:
+        fiyat = min(sepete_ozel)
+        liste_fiyatlari = [f for f in fiyatlar if f not in sepete_ozel]
+        normal = min(liste_fiyatlari) if liste_fiyatlari else None
+    else:
+        fiyat, normal = min(fiyatlar), None
+    if normal is not None and normal <= fiyat:
+        normal = None
+
+    return {"fiyat": fiyat, "normal_fiyat": normal, "indirimler": indirimler, "hata": None}
