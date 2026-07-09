@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otel Fiyat Takip</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  :root {
+    --arka: #f4f6fb; --kart: #ffffff; --metin: #1c2333; --soluk: #6b7385;
+    --dusuk: #16a34a; --yuksek: #dc2626; --cizgi: #e4e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--arka); color: var(--metin);
+    max-width: 860px; margin: 0 auto; padding: 20px 16px 48px;
+  }
+  h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  #guncelleme { color: var(--soluk); font-size: .85rem; margin-bottom: 20px; }
+  .kart {
+    background: var(--kart); border: 1px solid var(--cizgi); border-radius: 14px;
+    padding: 18px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(20,30,60,.06);
+  }
+  .kart h2 { font-size: 1.15rem; margin-bottom: 2px; }
+  .tarih { color: var(--soluk); font-size: .85rem; margin-bottom: 12px; }
+  .fiyatlar { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+  .fiyat-kutu {
+    flex: 1; min-width: 150px; border: 1px solid var(--cizgi);
+    border-radius: 10px; padding: 10px 14px;
+  }
+  .site-ad { font-size: .8rem; color: var(--soluk); }
+  .tutar { font-size: 1.45rem; font-weight: 700; }
+  .degisim { font-size: .85rem; font-weight: 600; }
+  .degisim.dusuk { color: var(--dusuk); }
+  .degisim.yuksek { color: var(--yuksek); }
+  .indirimler { font-size: .85rem; color: #92600a; background: #fdf3df;
+    border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; }
+  .hata { font-size: .85rem; color: var(--yuksek); }
+  canvas { margin-top: 6px; }
+  a.link { font-size: .8rem; color: #2563eb; text-decoration: none; }
+</style>
+</head>
+<body>
+  <h1>🏨 Otel Fiyat Takip</h1>
+  <div id="guncelleme">Yükleniyor…</div>
+  <div id="oteller"></div>
+  <script src="app.js"></script>
+</body>
+</html>

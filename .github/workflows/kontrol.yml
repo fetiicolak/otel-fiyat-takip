@@ -1,0 +1,55 @@
+name: Fiyat Kontrol
+
+on:
+  schedule:
+    - cron: "0 */4 * * *"   # 4 saatte bir kontrol
+    - cron: "0 6 * * *"     # 09:00 TR — günlük özet
+  workflow_dispatch:
+    inputs:
+      ozet:
+        description: "Günlük özet de gönderilsin mi?"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fiyat-kontrol
+  cancel-in-progress: false
+
+jobs:
+  kontrol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Fiyatları kontrol et
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_IDS: ${{ secrets.TELEGRAM_CHAT_IDS }}
+        run: |
+          if [ "${{ github.event.schedule }}" = "0 6 * * *" ] || [ "${{ inputs.ozet }}" = "true" ]; then
+            python -m src.main --ozet
+          else
+            python -m src.main
+          fi
+
+      - name: Fiyat geçmişini kaydet
+        run: |
+          git config user.name "fiyat-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data docs
+          git diff --cached --quiet || git commit -m "Fiyat güncellemesi: $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push

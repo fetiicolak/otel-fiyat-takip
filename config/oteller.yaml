@@ -1,0 +1,34 @@
+# ============================================================
+# Otel Fiyat Takip — Yapılandırma
+# ============================================================
+# URL'leri alırken: sitede otel sayfasını açın, GİRİŞ/ÇIKIŞ
+# tarihlerini ve KİŞİ SAYISINI seçin, sonra adres çubuğundaki
+# linki buraya yapıştırın. (Tarih bilgisi linkin içinde taşınır.)
+
+ayarlar:
+  # Bildirim eşikleri: fiyat değişimi bu ikisinden birini aşarsa bildirim gönderilir
+  esik_yuzde: 3        # % cinsinden
+  esik_tl: 250         # TL cinsinden
+
+oteller:
+  - id: otel-1
+    ad: "BİRİNCİ OTELİN ADI"          # <-- doldurun
+    giris: "2026-08-14"               # <-- giriş tarihi (bilgi amaçlı)
+    cikis: "2026-08-18"               # <-- çıkış tarihi (bilgi amaçlı)
+    kisi: "2 yetişkin"                # <-- bilgi amaçlı
+    kaynaklar:
+      - site: obilet
+        url: "BURAYA_OBILET_LINKI"    # <-- doldurun
+      - site: hotelscom
+        url: "BURAYA_HOTELSCOM_LINKI" # <-- doldurun
+
+  - id: otel-2
+    ad: "İKİNCİ OTELİN ADI"           # <-- doldurun
+    giris: "2026-08-14"
+    cikis: "2026-08-18"
+    kisi: "2 yetişkin"
+    kaynaklar:
+      - site: obilet
+        url: "BURAYA_OBILET_LINKI"
+      - site: hotelscom
+        url: "BURAYA_HOTELSCOM_LINKI"

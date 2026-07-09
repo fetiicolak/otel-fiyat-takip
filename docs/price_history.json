@@ -1,0 +1,11 @@
+[
+ {"zaman": "2026-07-07T08:00:00+00:00", "otel_id": "otel-1", "otel_ad": "Örnek Otel A", "giris": "2026-08-14", "cikis": "2026-08-18", "site": "obilet", "url": "https://www.obilet.com", "fiyat": 12400, "indirimler": [], "hata": null},
+ {"zaman": "2026-07-07T08:00:00+00:00", "otel_id": "otel-1", "otel_ad": "Örnek Otel A", "giris": "2026-08-14", "cikis": "2026-08-18", "site": "hotelscom", "url": "https://tr.hotels.com", "fiyat": 12900, "indirimler": [], "hata": null},
+ {"zaman": "2026-07-07T20:00:00+00:00", "otel_id": "otel-1", "otel_ad": "Örnek Otel A", "giris": "2026-08-14", "cikis": "2026-08-18", "site": "obilet", "url": "https://www.obilet.com", "fiyat": 12150, "indirimler": ["Erken rezervasyon %15 indirim"], "hata": null},
+ {"zaman": "2026-07-07T20:00:00+00:00", "otel_id": "otel-1", "otel_ad": "Örnek Otel A", "giris": "2026-08-14", "cikis": "2026-08-18", "site": "hotelscom", "url": "https://tr.hotels.com", "fiyat": 12900, "indirimler": [], "hata": null},
+ {"zaman": "2026-07-08T08:00:00+00:00", "otel_id": "otel-1", "otel_ad": "Örnek Otel A", "giris": "2026-08-14", "cikis": "2026-08-18", "site": "obilet", "url": "https://www.obilet.com", "fiyat": 11150, "indirimler": ["Erken rezervasyon %15 indirim"], "hata": null},
+ {"zaman": "2026-07-08T08:00:00+00:00", "otel_id": "otel-1", "otel_ad": "Örnek Otel A", "giris": "2026-08-14", "cikis": "2026-08-18", "site": "hotelscom", "url": "https://tr.hotels.com", "fiyat": 12450, "indirimler": [], "hata": null},
+ {"zaman": "2026-07-07T08:00:00+00:00", "otel_id": "otel-2", "otel_ad": "Örnek Otel B", "giris": "2026-08-14", "cikis": "2026-08-18", "site": "obilet", "url": "https://www.obilet.com", "fiyat": 18500, "indirimler": [], "hata": null},
+ {"zaman": "2026-07-07T20:00:00+00:00", "otel_id": "otel-2", "otel_ad": "Örnek Otel B", "giris": "2026-08-14", "cikis": "2026-08-18", "site": "obilet", "url": "https://www.obilet.com", "fiyat": 19200, "indirimler": [], "hata": null},
+ {"zaman": "2026-07-08T08:00:00+00:00", "otel_id": "otel-2", "otel_ad": "Örnek Otel B", "giris": "2026-08-14", "cikis": "2026-08-18", "site": "hotelscom", "url": "https://tr.hotels.com", "fiyat": 19750, "indirimler": ["Son dakika fırsatı %10"], "hata": null}
+]
