@@ -1025,5 +1025,70 @@
    "Bu oda için geçerli 1.500 TL indirim kuponu"
   ],
   "hata": null
+ },
+ {
+  "zaman": "2026-07-12T03:43:13+00:00",
+  "otel_id": "marin",
+  "otel_ad": "Marin Otel (Çeşme)",
+  "giris": "2026-09-08",
+  "cikis": "2026-09-11",
+  "site": "obilet",
+  "url": "https://www.obilet.com/otel-detay/marin-otel-cesme-504331/20260908-20260911/2ad",
+  "fiyat": 8750.0,
+  "normal_fiyat": 9600.0,
+  "indirimler": [
+   "Sepete özel 850 TL indirim"
+  ],
+  "hata": null
+ },
+ {
+  "zaman": "2026-07-12T03:43:13+00:00",
+  "otel_id": "marin",
+  "otel_ad": "Marin Otel (Çeşme)",
+  "giris": "2026-09-08",
+  "cikis": "2026-09-11",
+  "site": "etstur",
+  "url": "https://www.etstur.com/Marin-Otel-Cesme?check_in=08.09.2026&check_out=11.09.2026&adult_1=2",
+  "fiyat": 9120.0,
+  "normal_fiyat": 9600.0,
+  "indirimler": [
+   "Bu oda için geçerli 480 TL indirim kuponu",
+   "Maximum'a özel sepette %5 ek indirim",
+   "Bu oda için geçerli 563 TL indirim kuponu"
+  ],
+  "hata": null
+ },
+ {
+  "zaman": "2026-07-12T03:43:13+00:00",
+  "otel_id": "atrium",
+  "otel_ad": "Atrium Otel (Çeşme)",
+  "giris": "2026-09-11",
+  "cikis": "2026-09-14",
+  "site": "obilet",
+  "url": "https://www.obilet.com/otel-detay/atrium-105029/20260911-20260914/2ad",
+  "fiyat": 9484.0,
+  "normal_fiyat": 10484.0,
+  "indirimler": [
+   "Sepete özel 1.000 TL indirim"
+  ],
+  "hata": null
+ },
+ {
+  "zaman": "2026-07-12T03:43:13+00:00",
+  "otel_id": "atrium",
+  "otel_ad": "Atrium Otel (Çeşme)",
+  "giris": "2026-09-11",
+  "cikis": "2026-09-14",
+  "site": "etstur",
+  "url": "https://www.etstur.com/Atrium-Apart-Hotel?check_in=11.09.2026&check_out=14.09.2026&adult_1=2",
+  "fiyat": 9975.0,
+  "normal_fiyat": 10500.0,
+  "indirimler": [
+   "Bu oda için geçerli 1.050 TL indirim kuponu",
+   "Maximum'a özel sepette %5 ek indirim",
+   "Bu oda için geçerli 1.200 TL indirim kuponu",
+   "Bu oda için geçerli 1.500 TL indirim kuponu"
+  ],
+  "hata": null
  }
 ]
