@@ -2162,5 +2162,69 @@
   "normal_fiyat": null,
   "indirimler": [],
   "hata": "Oda fiyatı bulunamadı (sayfa yapısı değişmiş veya müsaitlik yok olabilir)"
+ },
+ {
+  "zaman": "2026-07-14T14:04:57+00:00",
+  "otel_id": "marin",
+  "otel_ad": "Marin Otel (Çeşme)",
+  "giris": "2026-09-08",
+  "cikis": "2026-09-11",
+  "site": "obilet",
+  "url": "https://www.obilet.com/otel-detay/marin-otel-cesme-504331/20260908-20260911/2ad",
+  "fiyat": 850.0,
+  "normal_fiyat": null,
+  "indirimler": [
+   "Bu otelde obilet'ten sana özel 850 TL indirim var!",
+   "INDIRIM KODU:"
+  ],
+  "hata": null
+ },
+ {
+  "zaman": "2026-07-14T14:04:57+00:00",
+  "otel_id": "marin",
+  "otel_ad": "Marin Otel (Çeşme)",
+  "giris": "2026-09-08",
+  "cikis": "2026-09-11",
+  "site": "etstur",
+  "url": "https://www.etstur.com/Marin-Otel-Cesme?check_in=08.09.2026&check_out=11.09.2026&adult_1=2",
+  "fiyat": null,
+  "normal_fiyat": null,
+  "indirimler": [],
+  "hata": "Oda fiyatı bulunamadı (sayfa yapısı değişmiş veya müsaitlik yok olabilir)"
+ },
+ {
+  "zaman": "2026-07-14T14:04:57+00:00",
+  "otel_id": "atrium",
+  "otel_ad": "Atrium Otel (Çeşme)",
+  "giris": "2026-09-11",
+  "cikis": "2026-09-14",
+  "site": "obilet",
+  "url": "https://www.obilet.com/otel-detay/atrium-105029/20260911-20260914/2ad",
+  "fiyat": 1100.0,
+  "normal_fiyat": null,
+  "indirimler": [
+   "Bu otelde obilet'ten sana özel 1.100 TL indirim var!",
+   "INDIRIM KODU:",
+   "%5 indirim"
+  ],
+  "hata": null
+ },
+ {
+  "zaman": "2026-07-14T14:04:57+00:00",
+  "otel_id": "atrium",
+  "otel_ad": "Atrium Otel (Çeşme)",
+  "giris": "2026-09-11",
+  "cikis": "2026-09-14",
+  "site": "etstur",
+  "url": "https://www.etstur.com/Atrium-Apart-Hotel?check_in=11.09.2026&check_out=14.09.2026&adult_1=2",
+  "fiyat": 9975.0,
+  "normal_fiyat": 10500.0,
+  "indirimler": [
+   "Bu oda için geçerli 1.050 TL indirim kuponu",
+   "Maximum'a özel sepette %5 ek indirim",
+   "Bu oda için geçerli 1.200 TL indirim kuponu",
+   "Bu oda için geçerli 1.500 TL indirim kuponu"
+  ],
+  "hata": null
  }
 ]
